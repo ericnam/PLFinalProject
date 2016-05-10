@@ -37,7 +37,7 @@ def t_SIMB(t):
     return t
 
 def t_TEXT(t):
-    r'\'[ -~]+\''
+    r'\'[ -&,(-~]+\''
     #r'\'[a-zA-Z0-9_+\*\- :,]*\''
     t.type = reserved.get(t.value,'TEXT')    # Check for reserved words
     return t

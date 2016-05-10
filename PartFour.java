@@ -53,6 +53,7 @@ public class PartFour {
                             .map(d -> Arrays.asList(e.get(1), e.get(2), e.get(6), e.get(7), d.get(1)))
                     )
                     .forEach(e -> {
+                        // should this output be fed into mini-lisp for post processing, or should it be run through all first and then sent to mini-lisp?
                         System.out.println(e);
                     });
             System.out.println();
