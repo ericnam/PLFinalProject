@@ -52,27 +52,27 @@ def standard_env():
     env = Env()
     env.update(vars(math)) # sin, cos, sqrt, pi, ...
     env.update({
-        '+':op.add, '-':op.sub, '*':op.mul, '/':op.div, 
-        '>':op.gt, '<':op.lt, '>=':op.ge, '<=':op.le, '=':op.eq, 
+        '+':op.add, '-':op.sub, '*':op.mul, '/':op.div,
+        '>':op.gt, '<':op.lt, '>=':op.ge, '<=':op.le, '=':op.eq,
         'abs':     abs,
-        'append':  op.add,  
+        'append':  op.add,
         'apply':   apply,
         'begin':   lambda *x: x[-1],
         'car':     lambda x: x[0],
-        'cdr':     lambda x: x[1:], 
+        'cdr':     lambda x: x[1:],
         'cons':    lambda x,y: [x] + y,
-        'eq?':     op.is_, 
-        'equal?':  op.eq, 
-        'length':  len, 
-        'list':    lambda *x: list(x), 
+        'eq?':     op.is_,
+        'equal?':  op.eq,
+        'length':  len,
+        'list':    lambda *x: list(x),
         'list?':   lambda x: isinstance(x,list),
         'exec':    lambda x: eval(compile(x,'None','single')),
         'map':     map,
         'max':     max,
         'min':     min,
         'not':     op.not_,
-        'null?':   lambda x: x == [], 
-        'number?': lambda x: isinstance(x, Number),   
+        'null?':   lambda x: x == [],
+        'number?': lambda x: isinstance(x, Number),
         'procedure?': callable,
         'round':   round,
         'symbol?': lambda x: isinstance(x, Symbol),
@@ -96,13 +96,13 @@ def repl(prompt='lis.py> '):
     "A prompt-read-eval-print loop."
     while True:
         val = eval(parse(raw_input(prompt)))
-        if val is not None: 
+        if val is not None:
             print(lispstr(val))
 
 def lispstr(exp):
     "Convert a Python object back into a Lisp-readable string."
     if  isinstance(exp, list):
-        return '(' + ' '.join(map(lispstr, exp)) + ')' 
+        return '(' + ' '.join(map(lispstr, exp)) + ')'
     else:
         return str(exp)
 
@@ -112,7 +112,7 @@ class Procedure(object):
     "A user-defined Scheme procedure."
     def __init__(self, parms, body, env):
         self.parms, self.body, self.env = parms, body, env
-    def __call__(self, *args): 
+    def __call__(self, *args):
         return eval(self.body, Env(self.parms, args, self.env))
 
 ################ eval
@@ -124,7 +124,7 @@ def eval(x, env=global_env):
     if isinstance(x, Symbol):      # variable reference
         return env.find(x)[x]
     elif not isinstance(x, List):  # constant literal
-        return x                
+        return x
     elif x[0] == 'quote':          # (quote exp)
         (_, exp) = x
         return exp

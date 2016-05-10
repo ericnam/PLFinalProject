@@ -11,7 +11,6 @@ name = {}
 
 global ast
 ast = []
-
 def cons(l):
     return [l[0]] + l[1]
 
@@ -75,17 +74,22 @@ def _print(l):
 
 name['print'] = _print
 
+def mapp(l):
+    print l
+
+name['mapp'] = mapp
+
 #  Evaluation functions
 
 def lisp_eval(simb, items):
     if simb in name:
         return call(name[simb], eval_lists(items))
     else:
-       return [simb] + items
+        return [simb] + items
 
 def call(f, l):
     try:
-        return f(eval_lists(l))  
+        return f(eval_lists(l))
     except TypeError:
         return f
 
@@ -140,8 +144,22 @@ def p_exp_call(p):
 
 def p_quoted_list(p):
     'quoted_list : QUOTE list'
-    #p[0] = p[2]
     p[0] = ["quote"] + [p[2]]
+
+###ADDED QUOTED TEXT FOR LAMBDA
+###ADDED QUOTED TEXT FOR LAMBDA
+
+# def p_quoted_text(p):
+#     'quoted_text : QUOTE items QUOTE'
+#     p[0] = p[2]
+#
+# def p_exp_qtext(p):
+#     'exp : quoted_text'
+#     p[0] = p[1]
+
+# def p_item_text(p):
+#     'item: quoted_text'
+#     p[0] = p[1]
 
 def p_list(p):
     'list : LPAREN items RPAREN'
@@ -170,7 +188,7 @@ def p_item_list(p):
 def p_item_list(p):
     'item : quoted_list'
     p[0] = p[1]
-        
+
 def p_item_call(p):
     'item : call'
     p[0] = p[1]
@@ -186,6 +204,7 @@ def p_call(p):
     #if isinstance(p[3], list) and isinstance(p[3][0], list) and p[3][0][0] == "'":
         #p[3] = [["quote"] + [p[3][0][1:]]]
     ast = [p[2]] + [i for i in p[3]]
+    print "p_call - AST is: ", ast
     p[0] = ast
     #p[0] = lisp_eval(p[2], p[3])
 
@@ -205,7 +224,7 @@ def p_atom_word(p):
     'atom : TEXT'
     p[0] = p[1]
 
-def p_atom_empty(p): 
+def p_atom_empty(p):
     'atom :'
     pass
 
@@ -229,5 +248,7 @@ def p_error(p):
 # Use this if you want to build the parser using SLR instead of LALR
 # yacc.yacc(method="SLR")
 yacc.yacc()
+
+
 
 
