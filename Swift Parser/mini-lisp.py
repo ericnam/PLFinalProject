@@ -10,8 +10,8 @@ class MiniLisp(cmd.Cmd):     # See https://docs.python.org/2/library/cmd.html
 
     def __init__(self):
         cmd.Cmd.__init__(self)
-        self.prompt = "ml> "
-        self.intro  = "Welcome to MiniLisp!"
+        self.prompt = "Swift> "
+        self.intro  = "Welcome to Swift!"
 
     def do_exit(self, args):
         """Exits from the console"""
@@ -35,15 +35,15 @@ class MiniLisp(cmd.Cmd):     # See https://docs.python.org/2/library/cmd.html
         """
         result = yacc.parse(line)
 
-        print "AST is: ", result
-        import lis
-        r = lis.eval(result)
-        if r is not None: print r
-        '''
+        # print "AST is: ", result
+        # import lis
+        # r = lis.eval(result)
+        # if r is not None: print r
+        
         s = lisp_str(result)
         if s != 'nil':
             print s
-        '''
+        
 
 if __name__ == '__main__':
         ml = MiniLisp()

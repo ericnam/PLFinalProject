@@ -5,7 +5,6 @@
 ################ Types
 
 from __future__ import division
-from PartThree import cars
 
 Symbol = str          # A Lisp Symbol is implemented as a Python str
 List   = list         # A Lisp List is implemented as a Python list
