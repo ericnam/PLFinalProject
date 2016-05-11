@@ -79,6 +79,11 @@ def mapp(l):
 
 name['mapp'] = mapp
 
+def cars(l):
+    print l
+
+name['cars'] = cars
+
 #  Evaluation functions
 
 def lisp_eval(simb, items):

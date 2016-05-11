@@ -14,5 +14,3 @@ class cars(object):
                 return None
         return cf
     run = f(1)
-
-
