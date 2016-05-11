@@ -75,11 +75,6 @@ def _print(l):
 
 name['print'] = _print
 
-def mapp(l):
-    print l
-
-name['mapp'] = mapp
-
 def cars(l):
     print l
 

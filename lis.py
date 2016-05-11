@@ -5,6 +5,7 @@
 ################ Types
 
 from __future__ import division
+from PartThree import cars
 
 Symbol = str          # A Lisp Symbol is implemented as a Python str
 List   = list         # A Lisp List is implemented as a Python list
@@ -75,6 +76,7 @@ def standard_env():
         'not':     op.not_,
         'null?':   lambda x: x == [], 
         'number?': lambda x: isinstance(x, Number),   
+        'run':     lambda x, y: x.run(y[0]) if len(y) < 2 else x.run(y[0])(y[1]),
         'procedure?': callable,
         'round':   round,
         'symbol?': lambda x: isinstance(x, Symbol),
@@ -121,14 +123,16 @@ class Procedure(object):
 
 def eval(x, env=global_env):
     "Evaluate an expression in an environment."
-    # print 'x', x
+    toReturn = None
     if isinstance(x, Symbol):      # variable reference
-        toReturn = None
         try:
             toReturn = env.find(x)[x]
         except:
             # print (__builtins__['eval'])
-            toReturn = __builtins__['eval'](__builtins__['eval'](x))
+            try:
+                toReturn = __builtins__['eval'](__builtins__['eval'](x))
+            except:
+                toReturn = x
         # print 'toreturn', toReturn
         # print 'type', type(toReturn)
         return toReturn
@@ -144,6 +148,7 @@ def eval(x, env=global_env):
     elif x[0] == 'define':         # (define var exp)
         (_, var, exp) = x
         # print 'exp', exp
+        # print 'var', var
         env[var] = eval(exp, env)
     elif x[0] == 'set!':           # (set! var exp)
         (_, var, exp) = x
@@ -153,14 +158,23 @@ def eval(x, env=global_env):
         return Procedure(parms, body, env)
     elif x[0] == 'exec':
         proc = eval(x[0], env)
+        # print 'x0', x[0]
+        # print 'proc', proc
         import re
+        # print 're',re.sub(r"^'|'$", '', x[1])
         exec(proc(re.sub(r"^'|'$", '', x[1])))
         return toReturn
+    # elif x[0] == 'run':
+        # print env
+        # proc = eval(x[0], env)
+        # args = [eval(exp, env) for exp in x[1:]]
+        # return proc(*x[1:])
     else:                          # (proc arg...)
         proc = eval(x[0], env)
         args = [eval(exp, env) for exp in x[1:]]
         # print 'final', proc, args
         # print 'def final', proc(*args)
+
         return proc(*args)
 
 # repl()

@@ -1,10 +1,10 @@
 class cars(object):
     def f(self):
         data = {
-            'brand': 'Nissan',
-            '$brand': lambda x: data.update({'name': x}),
-            'model': '350z',
-            '$model': lambda x: data.update({'model': x})
+            'getBrand': 'Nissan',
+            'setBrand': lambda x: data.update({'getBrand': x}),
+            'getModel': '350z',
+            'setModel': lambda x: data.update({'getModel': x})
         }
 
         def cf (self, d):
