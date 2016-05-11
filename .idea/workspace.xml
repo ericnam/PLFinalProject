@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b08fc74-8fea-4213-a77d-abcce2f33064" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lex$py.class" afterPath="$PROJECT_DIR$/lex$py.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lis$py.class" afterPath="$PROJECT_DIR$/lis$py.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yacc$py.class" afterPath="$PROJECT_DIR$/yacc$py.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lex.py" afterPath="$PROJECT_DIR$/lex.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lis.py" afterPath="$PROJECT_DIR$/lis.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yacc.py" afterPath="$PROJECT_DIR$/yacc.py" />
     </list>
     <ignored path="PLFinalProject.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -787,12 +781,12 @@
       <option name="number" value="Default" />
       <updated>1462919113619</updated>
       <workItem from="1462919115233" duration="3844000" />
-      <workItem from="1462938915442" duration="1897000" />
+      <workItem from="1462938915442" duration="2303000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5741000" />
+    <option name="totallyTimeSpent" value="6147000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1552" height="840" extended-state="6" />

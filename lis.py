@@ -66,6 +66,7 @@ def standard_env():
         'length':  len, 
         'list':    lambda *x: list(x), 
         'list?':   lambda x: isinstance(x,list), 
+        'exec':    lambda x: eval(compile(x,'None','single')),
         'map':     map,
         # 'mapp':    lambda x, y: x[0] + y[0],
         'mapp':    lambda y, x: [y(item) for item in x], 
@@ -120,7 +121,7 @@ class Procedure(object):
 
 def eval(x, env=global_env):
     "Evaluate an expression in an environment."
-    print 'x', x
+    # print 'x', x
     if isinstance(x, Symbol):      # variable reference
         toReturn = None
         try:
@@ -142,6 +143,7 @@ def eval(x, env=global_env):
         return eval(exp, env)
     elif x[0] == 'define':         # (define var exp)
         (_, var, exp) = x
+        # print 'exp', exp
         env[var] = eval(exp, env)
     elif x[0] == 'set!':           # (set! var exp)
         (_, var, exp) = x
@@ -149,6 +151,11 @@ def eval(x, env=global_env):
     elif x[0] == 'lambda':         # (lambda (var...) body)
         (_, parms, body) = x
         return Procedure(parms, body, env)
+    elif x[0] == 'exec':
+        proc = eval(x[0], env)
+        import re
+        exec(proc(re.sub(r"^'|'$", '', x[1])))
+        return toReturn
     else:                          # (proc arg...)
         proc = eval(x[0], env)
         args = [eval(exp, env) for exp in x[1:]]
